@@ -74,8 +74,10 @@
 		{% endfor %}
 	</div>
 </section>
-
-<a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<div class="row">
+	<a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+	<a href="/"><button id="deleteVenueBtn" data-id="{{ venue.id }}" class="btn btn-danger btn-lg ml-6" onclick=>Delete Venue</button>
+</div>
 
 {% endblock %}
 
