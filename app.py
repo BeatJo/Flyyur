@@ -7,6 +7,7 @@ import sys
 import dateutil.parser
 import babel
 from flask import Flask, render_template, request, Response, flash, redirect, url_for
+
 from flask_moment import Moment
 import logging
 from logging import Formatter, FileHandler
@@ -119,19 +120,15 @@ def create_venue_submission():
     
     db.session.add(venue)
     db.session.commit()
-    
       
     # on successful db insert, flash success
     flash('Venue ' + request_form.name.data + ' was successfully listed!')
-  except:
+  except Exception as ex:
     db.session.rollback()
     flash('An error occurred. Venue ' + request_form.name.data + ' could not be listed.')
     print(sys.exc_info())
   finally:
     db.session.close()
-  # TODO: on unsuccessful db insert, flash an error instead.
-  # e.g., flash('An error occurred. Venue ' + data.name + ' could not be listed.')
-  # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
   return render_template('pages/home.html')
 
 @app.route('/venues/<venue_id>', methods=['GET', 'DELETE'])
